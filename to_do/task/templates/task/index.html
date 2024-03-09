@@ -1,0 +1,13 @@
+{% extends 'task/base.html' %}
+{%block content%}
+<div class="container">
+{% for task in tasks%}
+     <div style="background-color: {{ task.color }}; padding: 10px; margin-bottom: 10px;">
+            <h2>{{ task.title }}</h2>
+            <p>{{ task.content }}</p>
+            <p>Start Date: {{ task.date_start }}</p>
+            <p>End Date: {{ task.date_end }}</p>
+        </div>
+    {%endfor%}
+</div>
+{%endblock%}

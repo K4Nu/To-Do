@@ -1,0 +1,39 @@
+{% extends 'task/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <h1>Hello</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.title|as_crispy_field }}
+        {{ form.content|as_crispy_field }}
+
+        <div class="mb-3">
+            {{ form.date_start.label_tag }}
+            <input type="date" class="form-control" id="{{ form.date_start.id_for_label }}" name="{{ form.date_start.name }}" value="{{ form.date_start.value|date:'Y-m-d' }}" required>
+            {% for error in form.date_start.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.date_end.label_tag }}
+            <input type="date" class="form-control" id="{{ form.date_end.id_for_label }}" name="{{ form.date_end.name }}" value="{{ form.date_end.value|date:'Y-m-d' }}" required>
+            {% for error in form.date_end.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.color.label_tag }}
+            <input type="color" class="form-control form-control-color" id="{{ form.color.id_for_label }}" name="{{ form.color.name }}" value="{{ form.color.value|default_if_none:'#000000' }}" title="Choose your color">
+            {% for error in form.color.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}
